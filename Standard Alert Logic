@@ -2,11 +2,10 @@
 // © cts_trader1
 
 //@version=4
-study("study name")
+study("UPDATE NAME")
 
 //insert trade logic
 
-test = close
 
 
 //****
