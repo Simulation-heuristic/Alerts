@@ -1,5 +1,5 @@
 //@version=4
-strategy(title="1.2 - Strategy",initial_capital=2500,default_qty_type=strategy.percent_of_equity,default_qty_value=5)
+strategy(title="UPDATE TITLE",initial_capital=2500,default_qty_type=strategy.percent_of_equity,default_qty_value=5)
 
 //Only Long trades
 strategy.risk.allow_entry_in(strategy.direction.long)
