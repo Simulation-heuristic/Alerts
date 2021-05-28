@@ -4,9 +4,9 @@ strategy(title="UPDATE TITLE",initial_capital=2500,default_qty_type=strategy.per
 //Only Long trades
 strategy.risk.allow_entry_in(strategy.direction.long)
 
-////////////////////
-///*****TRADE LOGIC
-///////////////////
+//////////////////////////
+///*****ALGO LOGIC START
+/////////////////////////
 
 
 //Buy Signal
@@ -19,10 +19,15 @@ sellSignal =
 enterLong  = 
 enterShort = 
 
+//////////////////////////
+///*****ALGO LOGIC END
+/////////////////////////
 
-////////////////////
-///*****DATE LOGIC
-///////////////////
+
+
+///////////////////////////
+///*****BACKTEST SETTINGS
+//////////////////////////
 
 
 // STEP 1:
