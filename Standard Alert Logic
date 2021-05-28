@@ -2,12 +2,11 @@
 // © cts_trader1
 
 //@version=4
-study("UPDATE NAME")
+study("UPDATE")
 
 //////////////////////////
 ///*****ALGO LOGIC START
 /////////////////////////
-
 
 //////////////////////////
 ///*****ALGO LOGIC END
@@ -17,12 +16,17 @@ study("UPDATE NAME")
 //****ALERT SETTINGS
 ///////////////////////
 
-algo_number = 'x.x'
-if(buyalert,direction = 'buy')
-if(sellalert,direction = 'sell')
+algo_number = 'UPDATE'
+if(buySignal)
+    direction = 'buy'
+if(sellSignal)
+    direction = 'sell'
 chart = (((time-time[1])/1000)/60)
 notes = "placeholder"
 
 
-//alert
-alertcondition(test,title="New Signal", message="{\"ticker\":\"{{ticker}}\",\"algo\":\"{{algo_number}}\",\"direction\":\"{{direction}}\",\"time\":\"{{time}}\",\"chart\":\"{{chart}}\",\"price\":\"{{close}}\",\"note\":\"{{note}}\",\"url\":\"https://www.tradingview.com/symbols/OTC-{{ticker}}/\"}")
+//alert buy
+alertcondition(buySignal,title="New Signal", message="{\"ticker\":\"{{ticker}}\",\"algo\":\"{{algo_number}}\",\"direction\":\"{{direction}}\",\"time\":\"{{time}}\",\"chart\":\"{{chart}}\",\"price\":\"{{close}}\",\"note\":\"{{note}}\",\"url\":\"https://www.tradingview.com/symbols/OTC-{{ticker}}/\"}")
+
+//alert sell
+alertcondition(sellSignal,title="New Signal", message="{\"ticker\":\"{{ticker}}\",\"algo\":\"{{algo_number}}\",\"direction\":\"{{direction}}\",\"time\":\"{{time}}\",\"chart\":\"{{chart}}\",\"price\":\"{{close}}\",\"note\":\"{{note}}\",\"url\":\"https://www.tradingview.com/symbols/OTC-{{ticker}}/\"}")
