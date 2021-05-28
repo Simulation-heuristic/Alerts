@@ -4,12 +4,18 @@
 //@version=4
 study("UPDATE NAME")
 
-//insert trade logic
+//////////////////////////
+///*****ALGO LOGIC START
+/////////////////////////
 
 
+//////////////////////////
+///*****ALGO LOGIC END
+/////////////////////////
 
-//****
-//alert parameters -> update algo number
+////////////////////////
+//****ALERT SETTINGS
+///////////////////////
 
 algo_number = 'x.x'
 if(buyalert,direction = 'buy')
