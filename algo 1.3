@@ -1,39 +1,36 @@
-////////////////////
-///*****TRADE LOGIC
-///////////////////
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © cts_trader1
 
-//Filter 1 - KST
-roclen1 = input(17, minval=1, title = "ROC Length #1")
-roclen2 = input(12, minval=1, title = "ROC Length #2")
-roclen3 = input(20, minval=1, title = "ROC Length #3")
-roclen4 = input(25, minval=1, title = "ROC Length #4")
-smalen1 = input(6, minval=1, title = "SMA Length #1")
-smalen2 = input(5, minval=1, title = "SMA Length #2")
-smalen3 = input(1, minval=1, title = "SMA Length #3")
-smalen4 = input(1, minval=1, title = "SMA Length #4")
-siglen =  input(8, minval=1, title = "Signal Line Length")
-smaroc(roclen, smalen) => sma(roc(close, roclen), smalen)
-kst = smaroc(roclen1, smalen1) + 2 * smaroc(roclen2, smalen2) + 3 * smaroc(roclen3, smalen3) + 4 * smaroc(roclen4, smalen4)
-sig = sma(kst, siglen)
-//plot(kst, color=color.green, title="KST")
-//plot(sig, color=color.red, title="Signal")
+//@version=4
+study("1.3")
 
-//Filter 1 - Both below zero
-belowZero = kst < 100
+//////////////////////////
+///*****ALGO LOGIC START
+/////////////////////////
 
-//Filter 2 - KST crosses sig
-kstCrossOver = crossover(kst, sig)[2] 
 
-//Filter 3 - KST advances for 2 bars
-twoBarAdvance = kst[0]>kst[1] and kst[1]>kst[2] 
-
-//Buy Signal
-buySignal = belowZero and kstCrossOver and twoBarAdvance
-
-//Sell Signal
-sellSignal = crossunder(kst,sig)
+//////////////////////////
+///*****ALGO LOGIC END
+/////////////////////////
 
 ////////////////////////
-///*****TRADE LOGIC END
+//****ALERT SETTINGS
 ///////////////////////
 
+algo_number = '1.3'
+
+if(buySignal)
+    direction = 'buy'
+
+if(sellSignal)
+    direction = 'sell'
+
+chart = (((time-time[1])/1000)/60)
+notes = "placeholder"
+
+
+//alert buy
+alertcondition(buySignal,title="New Signal", message="{\"ticker\":\"{{ticker}}\",\"algo\":\"{{algo_number}}\",\"direction\":\"{{direction}}\",\"time\":\"{{time}}\",\"chart\":\"{{chart}}\",\"price\":\"{{close}}\",\"note\":\"{{note}}\",\"url\":\"https://www.tradingview.com/symbols/OTC-{{ticker}}/\"}")
+
+//alert sell
+alertcondition(sellSignal,title="New Signal", message="{\"ticker\":\"{{ticker}}\",\"algo\":\"{{algo_number}}\",\"direction\":\"{{direction}}\",\"time\":\"{{time}}\",\"chart\":\"{{chart}}\",\"price\":\"{{close}}\",\"note\":\"{{note}}\",\"url\":\"https://www.tradingview.com/symbols/OTC-{{ticker}}/\"}")
