@@ -8,36 +8,17 @@ strategy.risk.allow_entry_in(strategy.direction.long)
 ///*****TRADE LOGIC
 ///////////////////
 
-//Filter 1 - KST
-roclen1 = input(17, minval=1, title = "ROC Length #1")
-roclen2 = input(12, minval=1, title = "ROC Length #2")
-roclen3 = input(20, minval=1, title = "ROC Length #3")
-roclen4 = input(25, minval=1, title = "ROC Length #4")
-smalen1 = input(6, minval=1, title = "SMA Length #1")
-smalen2 = input(5, minval=1, title = "SMA Length #2")
-smalen3 = input(1, minval=1, title = "SMA Length #3")
-smalen4 = input(1, minval=1, title = "SMA Length #4")
-siglen =  input(8, minval=1, title = "Signal Line Length")
-smaroc(roclen, smalen) => sma(roc(close, roclen), smalen)
-kst = smaroc(roclen1, smalen1) + 2 * smaroc(roclen2, smalen2) + 3 * smaroc(roclen3, smalen3) + 4 * smaroc(roclen4, smalen4)
-sig = sma(kst, siglen)
-//plot(kst, color=color.green, title="KST")
-//plot(sig, color=color.red, title="Signal")
-
-//Filter 1 - Both below zero
-belowZero = kst < 100
-
-//Filter 2 - KST crosses sig
-kstCrossOver = crossover(kst, sig)[2] 
-
-//Filter 3 - KST advances for 2 bars
-twoBarAdvance = kst[0]>kst[1] and kst[1]>kst[2] 
 
 //Buy Signal
-buySignal = belowZero and kstCrossOver and twoBarAdvance
+buySignal = 
 
 //Sell Signal
-sellSignal = crossunder(kst,sig)
+sellSignal = 
+
+// Set trade entry conditions
+enterLong  = 
+enterShort = 
+
 
 ////////////////////
 ///*****DATE LOGIC
@@ -67,15 +48,6 @@ inDateRange = (time >= timestamp(syminfo.timezone, startYear,
          startMonth, startDate, 0, 0)) and
      (time < timestamp(syminfo.timezone, endYear, endMonth, endDate, 0, 0))
 
-// Calculate strategy values
-emaValue = ema(close, 20)
-
-plot(series=emaValue, color=color.teal, linewidth=2)
-
-// Set trade entry conditions
-enterLong  = (close > close[1]) and crossover(close, emaValue)
-enterShort = (close < close[1]) and crossunder(close, emaValue)
-
 // STEP 3:
 // Submit entry orders, but only when bar is inside date range
 if (inDateRange and buySignal)
@@ -88,7 +60,6 @@ if (inDateRange and sellSignal)
 // Exit open market position when date range ends
 if (not inDateRange)
     strategy.close_all()
-
 
 //Place trades
 //strategy.entry(id="buy", long=true, when=buySignal)
